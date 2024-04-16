@@ -9,7 +9,7 @@ P.S. The answer was $\text{Fib}(n) + \text{Tri}(n)$, combining Fibonacci and tri
 ## Background
 A 'fixed form formula' or a [closed-form expression](https://en.wikipedia.org/wiki/Closed-form_expression) is a mathematical equation comprising a finite number of terms. These expressions are crucial for gaining mathematical insights and improving computational efficiency within their respective domains. They offer significant advantages by simplifying complex calculations and providing quick solutions to otherwise laborious problems.
 
-Consider the sequence$(0, 1, 3, 6, 10, 15, 21, 28, ...)$. Each term here represents the sum of all integers from 0 up to the term's position. Calculating the 10,000th term manually or through straightforward computation would be impractical. However, with a closed-form formula$\frac{n(n+1)}{2}$, we can determine this value almost instantaneously for any position within the sequence.
+Consider the sequence $(0, 1, 3, 6, 10, 15, 21, 28, ...)$. Each term here represents the sum of all integers from 0 up to the term's position. Calculating the 10,000th term manually or through straightforward computation would be impractical. However, with a closed-form formula $\frac{n(n+1)}{2}$, we can determine this value almost instantaneously for any position within the sequence.
 
 ## Data Preparation
 
@@ -41,30 +41,8 @@ In practice, our training regimen began with a loop where the model was exposed 
 
 ## Results
 Here are the results of our training:
-![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/e3117d4a-9c57-46d8-b611-202140372c98)
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/80e94f66-3bcb-4fb9-a352-668664f1e095)
 
-```Python
-eq1 = ["FLOOR_DIV", "MULT", "N", "ADD", "N", "1", "2"]  # n * (n + 1) // 2 ; triangular numbers
-eq2 = ["ADD", "MULT", "2", "N", "1"]  # 2n + 1 ; odd numbers
-eq3 = ["MULT", "N", "N"]  # n * 2 ; square numbers
-
-X_demonstration_1 = [[0, 1, 3, 6, 10, 15, 21, 28],
-                     [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-                     [0, 1, 4, 9, 16, 25, 36]]
-
-X_demonstration_1_predicted = [[0.24458337, 0.24582638, 0.9978314 , 0.15597743],
-       [0.98345053, 0.24479996, 0.13787568, 0.11025475],
-       [0.3476571 , 0.25062287, 0.9999585 , 0.1379164 ]]
-
-X_demonstration_2 = [[0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78],
-                     [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-                     [0, 1, 4, 9, 16, 25, 36]]
-
-X_demonstration_2_predicted = [[0.7515641 , 0.53577894, 0.99555355, 0.9884969 ],
-       [0.98345053, 0.24479996, 0.13787568, 0.11025475],
-       [0.3476571 , 0.25062287, 0.9999585 , 0.1379164 ]]
-
-```
 ### Formula Predictions Analysis for Small Data Entries
 **Correct Predictions:**
 - **Triangular Numbers**: Identifies multiplication
