@@ -4,19 +4,21 @@
 What is a formula for this sequence:
 
 <p align="center">
-  $(1, 3, 5, 7, 9, 11, 13)$  
+  $1, 3, 5, 7, 9, 11, 13$  
 </p>
 
-The odds, $2n-1$ (or $2n+1$), easy right? How about:
+The odds, $2n-1$ (or $2n+1$), easy right?  
+How about:
 
 <p align="center">
-  $(0, 1, 3, 6, 10, 15, 21)$
+  $0, 1, 3, 6, 10, 15, 21$
 </p>
 
-A bit trickier, but many will recognize these as the triangular numbers, represented by the formula $\frac{n(n+1)}{2}$. Now, consider the sequence:
+A bit trickier, but many will recognize these as the triangular numbers, with the formula $\frac{n(n+1)}{2}$.  
+Now, consider the sequence:
 
 <p align="center">
-  $(0, 2, 4, 8, 13, 20, 29)$
+  $0, 2, 4, 8, 13, 20, 29$
 </p>
 
 Stumped, I bet. Yet, there’s likely a small voice telling you there’s something familiar about it. Imagine an AI that could analyze these integer sequences and **precisely** identify the functions describing them. 
@@ -46,7 +48,7 @@ A 'fixed form formula' or a [closed-form expression](https://en.wikipedia.org/wi
 Consider the sequence:
 
 <p align="center">
-  $(0, 1, 3, 6, 10, 15, 21, 28, ...)$
+  $0, 1, 3, 6, 10, 15, 21, 28, ...$
 </p>
 
 Each term here represents the sum of all integers from 0 up to the term's position. Calculating the 10,000th term manually or through straightforward computation would be impractical. However, with a closed-form formula $\frac{n(n+1)}{2}$, we can determine this value almost instantaneously for any position within the sequence.
@@ -54,44 +56,30 @@ Each term here represents the sum of all integers from 0 up to the term's positi
 ## Data Preparation
 
 ### Generating Mathematical Expressions
-To construct syntactically and semantically valid mathematical expressions, we utilized a tree-like structure with brute force validity checks.
+To construct syntactically and semantically valid mathematical expressions, we utilized a tree-like structure with brute force validity checks.  
+
+<p align="center">
+  $f(n)=((97) + (2 + n))$ pictured below:
+</p>
+
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/7347d5de-407d-4114-b27c-da65a83745d6)
+
 
 ### Integer Embeddings
 Given the allowed integer range of `[-2**64, 2**64]`, traditional normalization and scaling techniques were inadequate. Instead, we introduced 'integer embedding' where each integer is converted into a digit vector, scaled by their relative position. For instance, `19042` becomes `[1(sign-bit), 0.222, 0.444, 0, 1, 0.111]`. These vectors are then processed independently by a sequence model, which uses the vector elements as features and outputs a vector of specified `embedding_size`.
 
 ## Model Construction
 As asforementioned, an internal sequence model captures the information of an integer and converts it into an integer embedding. Afterwards, a deep sequence model process the sequence of integer embeddings and is decoded by a final dense layer for a prediction. This process is illustrated below:
-
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/ab7424c2-addc-4214-be24-83a3b5bb16e1)
 
 ## Training
-We adopted a curriculum learning approach due to the complex nature of the problem. Introducing the model to any mathematical expression from the outset could be either too challenging or slow the learning process. Therefore, we divided the complexity into two aspects: the number of terms in a mathematical expression and the complexity of the underlying functions. The idea was that the model should first master simpler tasks like addition before tackling more complex functions, such as Fibonacci sequences or binomial coefficients.
-
-In practice, our training regimen began with a loop where the model was exposed to expressions across all complexity levels. This initial broad exposure was intended to help the model generalize its learning. Following this, the model was repeatedly trained on simpler tasks tailored to its current level in the curriculum until its performance plateaued.
+We adopted a curriculum learning approach due to the complex nature of the problem. Introducing the model to any mathematical expression from the outset could be either too challenging or slow the learning process. Therefore, we divided the complexity into two aspects: the number of terms in a mathematical expression and the complexity of the underlying functions. The idea was that the model should first master simpler tasks like addition before tackling more complex functions, such as the Fibonacci sequence.
 
 ## Results
 Here are the results of our training:
-![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/80e94f66-3bcb-4fb9-a352-668664f1e095)
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/f2b72550-6048-4cd9-8071-b7233971c670)
 
-### Formula Predictions Analysis for Small Data Entries
-**Correct Predictions:**
-- **Triangular Numbers**: Identifies multiplication
-- **Odd Numbers**: Identifies addition
-- **Square Numbers**: Identifies multiplication
 
-**Failed Predictions:**
-- **Triangular Numbers**: 
-  - **Missed**: Slight addition
-  - **Missed**: Floor division
-- **Odd Numbers**:
-  - **Missed**: Multiplication is necessary for the computation
-
-### Formula Predictions Analysis for Larger Data Entries
-With a larger dataset, the prediction for **Triangular Numbers** improves:
-- **Now Predicts**: Multiplication, addition, and floor division
-- **Incorrectly Predicts**: Subtraction, which does not apply
-
-### Observations on Odd Numbers Formula
-The model's strong prediction of addition for **Odd Numbers** might be influenced by an assumption of$n+n$rather than the actual$2 \times n$. This suggests the model could be misinterpreting the multiplication of two as repetitive addition.
 
 ## Future Considerations
 ### Limitations of Neural Networks in Exact Problem Domains
