@@ -1,0 +1,27 @@
+{
+  "Digit Tree Information": {
+    "PROBABILITY_OF_DIGIT_TREE": 0.7,
+    "PROBABILITY_OF_ADD_DIGIT": 0.4,
+    "PROBABILITY_OF_NEGATIVE_CONSTANT": 0.4,
+    "MAXIMUM_DIGITS": 5
+  },
+  "Number Bounds": {
+    "NUMBER_LOWER_BOUND": -18446744073709551616,
+    "NUMBER_UPPER_BOUND": 18446744073709551616
+  },
+  "Sequence Bounds": {
+    "SEQUENCE_START_VALUE": 1,
+    "SEQUENCE_MIN_LENGTH": 6,
+    "SEQUENCE_MAX_LENGTH": 32
+  },
+  "Terms Bounds": {
+    "MIN_TERMS": 1,
+    "MAX_TERMS": 5,
+    "TERMS_COUNT_TOLERANCE": 0.8
+  },
+  "Generation Information": {
+    "GENERATION_ATTEMPTS": 10
+  }
+}
+
+

@@ -1,0 +1,21 @@
+digraph {
+	0 [label=POW]
+	1 [label=SUB]
+	0 -> 1
+	11 [label=ADD]
+	1 -> 11
+	111 [label=N]
+	11 -> 111
+	112 [label=N]
+	11 -> 112
+	12 [label=FIB]
+	1 -> 12
+	121 [label=ADD]
+	12 -> 121
+	1211 [label=N]
+	121 -> 1211
+	1212 [label=9]
+	121 -> 1212
+	2 [label=N]
+	0 -> 2
+}

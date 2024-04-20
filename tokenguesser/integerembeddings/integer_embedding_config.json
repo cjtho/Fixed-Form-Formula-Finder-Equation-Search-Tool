@@ -1,0 +1,7 @@
+{
+  "embedding_size": 8,
+  "mask_token": -1.0,
+  "base": 10
+}
+
+
