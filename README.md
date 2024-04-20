@@ -76,10 +76,11 @@ As asforementioned, an internal sequence model captures the information of an in
 We adopted a curriculum learning approach due to the complex nature of the problem. Introducing the model to any mathematical expression from the outset could be either too challenging or slow the learning process. Therefore, we divided the complexity into two aspects: the number of terms in a mathematical expression and the complexity of the underlying functions. The idea was that the model should first master simpler tasks like addition before tackling more complex functions, such as the Fibonacci sequence.
 
 ## Results
-Here are the results of our training:
-![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/f2b72550-6048-4cd9-8071-b7233971c670)
-
-
+The full breakdown can be found within the training_and_analysis notebook.
+![Untitled](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/42e9bc44-9952-49d7-b0ba-18682d3483c2)
+![Untitled](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/eb645d0d-3d96-4bfe-b880-0252ad0974f8)
+![Untitled](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/2a8ce748-fc29-4a63-83de-f80710848ab6)
+![Untitled](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/ba981032-2acc-4a99-b3a6-5ecc439cc518)
 
 ## Future Considerations
 ### Limitations of Neural Networks in Exact Problem Domains
