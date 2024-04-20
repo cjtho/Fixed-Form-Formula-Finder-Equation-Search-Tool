@@ -59,18 +59,24 @@ Each term here represents the sum of all integers from 0 up to the term's positi
 To construct syntactically and semantically valid mathematical expressions, we utilized a tree-like structure with brute force validity checks.  
 
 <p align="center">
-  $f(n)=((97) + (2 + n))$ pictured below:
+  $f(N)=((N + N) - \text{Fib}(N + 9))^N$ pictured below:
 </p>
 
-![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/7347d5de-407d-4114-b27c-da65a83745d6)
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/8e51a5e9-9663-424c-9b21-c43f66064f32)
 
+### Integer Embeddings \ (•◡•) /
+Given the massive desired integer range of $-2^{64} \leq x \leq 2^{64}$, traditional normalization and scaling techniques were not ideal. Instead, we excitingly introduce the idea of a 'integer embedding', where each integer is converted into a vector representation.
+An example would be:
 
-### Integer Embeddings
-Given the allowed integer range of `[-2**64, 2**64]`, traditional normalization and scaling techniques were inadequate. Instead, we introduced 'integer embedding' where each integer is converted into a digit vector, scaled by their relative position. For instance, `19042` becomes `[1(sign-bit), 0.222, 0.444, 0, 1, 0.111]`. These vectors are then processed independently by a sequence model, which uses the vector elements as features and outputs a vector of specified `embedding_size`.
+<p align="center">
+  $n = 19042 = \left [ \text{sign}(n), \frac{2}{9}, \frac{4}{9},\frac{0}{9}, \frac{9}{9}, \frac{1}{9} \right ] = \left [1, 0.222, 0.444, 0, 1, 0.111 \right ]$
+</p>
+
+These vectors can then be processed independently by a sequence model, which uses the vector elements as features and outputs a vector of specified `embedding_size`.
 
 ## Model Construction
 As asforementioned, an internal sequence model captures the information of an integer and converts it into an integer embedding. Afterwards, a deep sequence model process the sequence of integer embeddings and is decoded by a final dense layer for a prediction. This process is illustrated below:
-![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/ab7424c2-addc-4214-be24-83a3b5bb16e1)
+![image](https://github.com/cjtho/Fixed-Form-Formula-Finder-POC/assets/151635991/e5f7644c-55b2-4d68-a189-a5d25d5b46f9)
 
 ## Training
 We adopted a curriculum learning approach due to the complex nature of the problem. Introducing the model to any mathematical expression from the outset could be either too challenging or slow the learning process. Therefore, we divided the complexity into two aspects: the number of terms in a mathematical expression and the complexity of the underlying functions. The idea was that the model should first master simpler tasks like addition before tackling more complex functions, such as the Fibonacci sequence.
